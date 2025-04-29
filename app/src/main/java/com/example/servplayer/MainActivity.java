@@ -193,8 +193,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     void prevSong() {
         MyMediaPlayer.isPaused = false;
-        MyMediaPlayer.currentIndex--;
-
+        MyMediaPlayer.currentIndex =
+                (MyMediaPlayer.currentIndex - 1 + songsList.size()) % songsList.size();
         Intent prevInt = new Intent(this, MediaPlayerService.class);
         prevInt.setAction(SERVICE_PREV_SONG);
         prevInt.putExtra("media", songsList.get(MyMediaPlayer.currentIndex));
@@ -204,8 +204,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     void nextSong() {
         MyMediaPlayer.isPaused = false;
-        MyMediaPlayer.currentIndex++;
-
+        MyMediaPlayer.currentIndex =
+                (MyMediaPlayer.currentIndex + 1) % songsList.size();
         Intent nextInt = new Intent(this, MediaPlayerService.class);
         nextInt.setAction(SERVICE_NEXT_SONG);
         nextInt.putExtra("media", songsList.get(MyMediaPlayer.currentIndex));
@@ -312,7 +312,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Tst.show ();
     }
 
-    @SuppressLint("DefaultLocale")
     public static String convertToMMS(String duration) {
         long millis = Long.parseLong(duration);
 
