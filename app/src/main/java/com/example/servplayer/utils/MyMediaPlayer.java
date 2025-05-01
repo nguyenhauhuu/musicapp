@@ -1,4 +1,4 @@
-package com.example.servplayer;
+package com.example.servplayer.utils;
 
 import android.media.MediaPlayer;
 
